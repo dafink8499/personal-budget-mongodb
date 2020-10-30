@@ -38,6 +38,30 @@ app.get('/budget', (req, res) => {
             });
 });
 
+app.post('/mybudget', (req, res) => {
+    let newData = {
+        "title": req.body.title,
+        "budget": req.body.budget,
+        "color": req.body.color
+    };
+
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+            .then(() => {
+                console.log("Connected to the database")
+                myBudgetModel.insertMany(newData)
+                            .then((data) => {
+                                res.send(data)
+                                mongoose.connection.close()
+                            })
+                            .catch((connectionError) => {
+                                console.log(connectionError)
+                            })
+            })  
+            .catch((connectionError) => {
+                console.log(connectionError)
+            });
+});
+
 app.listen(port, () => {
     console.log(`API served at http://localhost:${port}`);
 });
