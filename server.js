@@ -10,7 +10,7 @@ const myBudgetModel = require("./models/myBudget_schema");
 
 let url = 'mongodb://localhost:27017/mybudgetdata';
 
-app.use('/', exoress.static('public'));
+app.use('/', express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
