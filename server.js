@@ -38,7 +38,7 @@ app.get('/budget', (req, res) => {
             });
 });
 
-app.post('/mybudget', (req, res) => {
+app.post('/budget', (req, res) => {
     let newData = {
         "title": req.body.title,
         "budget": req.body.budget,
