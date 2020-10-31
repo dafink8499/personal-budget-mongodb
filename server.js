@@ -8,12 +8,11 @@ const bodyParser = require('body-parser')
 const mongoose = require("mongoose");
 const myBudgetModel = require("./models/myBudget_schema");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 let url = 'mongodb://localhost:27017/myBudgetData';
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 /*
 '#ffcd56',
@@ -25,9 +24,9 @@ app.use(cors());
 '#ff8c00'*/
 
 app.get('/budget', (req, res) => {
-    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
             .then(() => {
-                console.log("Connected to the database")
+                //console.log("Connected to the database")
                 myBudgetModel.find({})
                             .then((data) => {
                                 res.json(data)
@@ -49,7 +48,7 @@ app.post('/mybudget', (req, res) => {
         "color": req.body.color
     };
 
-    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
             .then(() => {
                 console.log("Connected to the database")
                 myBudgetModel.insertMany(newData)

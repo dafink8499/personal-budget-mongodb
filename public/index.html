@@ -178,9 +178,9 @@
             axios.get('/budget').then(function (res) {
                 console.log(res.data);
                 for(var i = 0; i < res.data.length; i++) {
-                    dataSource.datasets[0].data[i] = res.data[i].budget;
-                    dataSource.datasets[0].backgroundColor[i] = res.data[i].color;
-                    dataSource.labels[i] = res.data[i].title;
+                    dataSource.datasets[0].data.push(res.data[i].budget);
+                    dataSource.datasets[0].backgroundColor.push(res.data[i].color);
+                    dataSource.labels.push(res.data[i].title);
                 }
                 createChart();
             })
