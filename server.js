@@ -3,9 +3,13 @@ const cors = require('cors');
 const app = express();
 const port = 3000;
 const fs = require('fs');
+const bodyParser = require('body-parser')
 
 const mongoose = require("mongoose");
 const myBudgetModel = require("./models/myBudget_schema");
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 let url = 'mongodb://localhost:27017/myBudgetData';
 
@@ -26,7 +30,7 @@ app.get('/budget', (req, res) => {
                 console.log("Connected to the database")
                 myBudgetModel.find({})
                             .then((data) => {
-                                res.send(data)
+                                res.json(data)
                                 mongoose.connection.close()
                             })
                             .catch((connectionError) => {
@@ -38,7 +42,7 @@ app.get('/budget', (req, res) => {
             });
 });
 
-app.post('/budget', (req, res) => {
+app.post('/mybudget', (req, res) => {
     let newData = {
         "title": req.body.title,
         "budget": req.body.budget,
@@ -50,7 +54,7 @@ app.post('/budget', (req, res) => {
                 console.log("Connected to the database")
                 myBudgetModel.insertMany(newData)
                             .then((data) => {
-                                res.send(data)
+                                res.json(data)
                                 mongoose.connection.close()
                             })
                             .catch((connectionError) => {
