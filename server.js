@@ -29,7 +29,7 @@ app.get('/budget', (req, res) => {
                 //console.log("Connected to the database")
                 myBudgetModel.find({})
                             .then((data) => {
-                                res.json(data)
+                                res.send(data)
                                 mongoose.connection.close()
                             })
                             .catch((connectionError) => {
@@ -53,7 +53,7 @@ app.post('/mybudget', (req, res) => {
                 console.log("Connected to the database")
                 myBudgetModel.insertMany(newData)
                             .then((data) => {
-                                res.json(data)
+                                res.send(data)
                                 mongoose.connection.close()
                             })
                             .catch((connectionError) => {
