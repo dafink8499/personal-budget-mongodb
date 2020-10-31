@@ -38,7 +38,7 @@ app.get('/budget', (req, res) => {
             })  
             .catch((connectionError) => {
                 console.log(connectionError)
-            });
+            })
 });
 
 app.post('/mybudget', (req, res) => {
@@ -62,7 +62,7 @@ app.post('/mybudget', (req, res) => {
             })  
             .catch((connectionError) => {
                 console.log(connectionError)
-            });
+            })
 });
 
 app.listen(port, () => {
