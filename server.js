@@ -8,9 +8,9 @@ const bodyParser = require('body-parser')
 const mongoose = require("mongoose");
 const myBudgetModel = require("./models/myBudget_schema");
 
-let url = 'mongodb://localhost:27017/myBudgetData';
+let url = 'mongodb://localhost:27017/mybudgetdata';
 
-app.use(cors());
+app.use('/', exoress.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
